@@ -32,3 +32,118 @@ namespace One
         }
     }
 }
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace One
+{
+    class AnimalIDInfo
+    {
+        public int IDNum { get; set; } = 0;
+        public string Owner { get; set; } = "No Owner";
+    }
+}
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Linq;
+
+namespace One
+{
+    class Dog : Animal
+    {
+        public string Sound2 { get; set; } = "Grrr";
+
+        public new void MakeSound()
+        {
+            Console.WriteLine($"{Name} says {Sound} and {Sound2}");
+        }
+
+        public Dog(string name = "No Name", string sound = "No Sound", string sound2 = "No Sound 2")
+            :base(name, sound)
+        {
+            Sound2 = sound2;
+        }
+    }
+}
+
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Linq;
+
+namespace One
+{
+    class Animal
+    {
+        private string name;
+        protected string sound;
+
+        protected AnimalIDInfo animalIDInfo = new AnimalIDInfo();
+
+        public void SetAnimalIDInfo(int idNum, string owner)
+        {
+            animalIDInfo.IDNum = idNum;
+            animalIDInfo.Owner = owner;
+        }
+
+        public void GetAnimalIDInfo()
+        {
+            Console.WriteLine($"{Name} had the ID of {animalIDInfo.IDNum} and is owned by {animalIDInfo.Owner}");
+        }
+
+        public void MakeSound()
+        {
+            Console.WriteLine($"{Name} says {sound}");
+        }
+
+        public Animal()
+            : this("No Name", "No Sound") { }
+
+        public Animal(string name)
+            :this(name, "No Sound") { }
+
+        public Animal(string name, string sound)
+        {
+            Name = name;
+            Sound = sound;
+        }
+
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                if(!value.Any(char.IsDigit))
+                {
+                    name = "No Name";
+                }
+                name = value;
+            }
+        }
+
+        public string Sound
+        {
+            get { return sound; }
+            set
+            {
+                if (value.Length > 10)
+                {
+                    name = "No Sound";
+                }
+                name = value;
+            }
+        }
+
+    }
+}
+
